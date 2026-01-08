@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
 export function Header() {
@@ -56,9 +57,13 @@ export function Header() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative">
         <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
           <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/50 dark:bg-primary/10 backdrop-blur-sm rounded-full flex items-center justify-center border border-white/40 dark:border-primary/20 shadow-lg shadow-black/5 transition-all duration-300 group-hover:scale-110 group-hover:border-white/60 dark:group-hover:border-primary/40 group-hover:shadow-xl">
-              <span className="text-primary font-bold text-lg sm:text-xl">ST</span>
-            </div>
+            <Image 
+              src="/sydneytiling.png" 
+              alt="Logo"
+              width={52}
+              height={52}
+              className="w-10 h-10 sm:w-16 sm:h-16 object-contain rounded-full transition-transform duration-300 group-hover:scale-110"
+            />
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6 xl:gap-10">

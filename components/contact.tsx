@@ -4,6 +4,7 @@ import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
+import emailjs from "@emailjs/browser"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -39,32 +40,27 @@ export function Contact() {
     setFormStatus("submitting")
     setErrorMessage("")
 
-    try {
-      const formData = new FormData(formRef.current!)
-      
-      const response = await fetch("https://formly.email/submit", {
-        method: "POST",
-        body: formData,
-      })
+    if (!formRef.current) return
 
-      // Formly returns 302 redirect on success, or 200 with JSON
-      if (response.ok || response.redirected || response.status === 302) {
-        setFormStatus("success")
-        formRef.current?.reset()
-        
-        setTimeout(() => {
-          setFormStatus("idle")
-        }, 5000)
-      } else {
-        // Try to parse error message
-        const result = await response.json().catch(() => ({ message: "Submission failed" }))
-        throw new Error(result.message || "Submission failed")
-      }
+    try {
+      await emailjs.sendForm(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "",
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "",
+        formRef.current,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || ""
+      )
+
+      setFormStatus("success")
+      formRef.current.reset()
+
+      setTimeout(() => {
+        setFormStatus("idle")
+      }, 5000)
     } catch (error) {
       console.error("Form submission error:", error)
       setFormStatus("error")
       setErrorMessage("Failed to send message. Please try again or email us directly.")
-      
+
       setTimeout(() => {
         setFormStatus("idle")
         setErrorMessage("")
@@ -143,10 +139,6 @@ export function Contact() {
             )}
 
             <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-6" aria-label="Contact form for free tiling quote">
-              {/* Formly.email access key */}
-              <input type="hidden" name="access_key" value={process.env.NEXT_PUBLIC_FORMLY_ACCESS_KEY || ""} />
-              <input type="hidden" name="subject" value="New Quote Request - Sydney Pro Tiling" />
-              <input type="hidden" name="from_name" value="Sydney Pro Tiling Website" />
               
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
                 <div className="transition-all duration-300 hover:translate-y-[-2px]">
@@ -237,10 +229,10 @@ export function Contact() {
               >
                 <h3 className="text-[10px] sm:text-xs font-medium text-muted-foreground mb-1.5 sm:mb-2 uppercase tracking-wide">Email</h3>
                 <a
-                  href="mailto:Erka05503@gmail.com"
+                  href="mailto:sydneytileco@gmail.com"
                   className="text-xs sm:text-sm font-semibold hover:text-accent transition-colors break-all"
                 >
-                  Erka05503@gmail.com
+                  sydneytileco@gmail.com
                 </a>
               </div>
               <div 

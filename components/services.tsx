@@ -119,9 +119,6 @@ export function Services() {
                     <h3 className="text-lg sm:text-xl font-semibold" itemProp="name">{service.title}</h3>
                   </div>
                   <p className="text-sm sm:text-base text-muted-foreground leading-relaxed" itemProp="description">{service.description}</p>
-                  <p className="text-base sm:text-lg font-semibold text-foreground group-hover:text-accent transition-colors duration-300" itemProp="priceRange">
-                    {service.price}
-                  </p>
                   <meta itemProp="areaServed" content="Sydney, NSW, Australia" />
                   <meta itemProp="provider" content="Sydney Pro Tiling" />
                 </div>

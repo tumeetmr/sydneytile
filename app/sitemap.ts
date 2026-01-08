@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next"
 import { projects } from "@/lib/data"
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://sydneytiling.com"
+  const baseUrl = "https://sydneytileco.com"
   const currentDate = new Date().toISOString()
 
   // Main pages

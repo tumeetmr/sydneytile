@@ -8,7 +8,7 @@ import { projects } from "@/lib/data"
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const resolvedParams = await params
   const project = projects.find((p) => p.id === resolvedParams.id)
-  const baseUrl = "https://sydneytiling.com"
+  const baseUrl = "https://sydneytileco.com"
 
   if (!project) {
     return {
@@ -87,7 +87,7 @@ export async function generateStaticParams() {
 export default async function ProjectPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = await params
   const project = projects.find((p) => p.id === resolvedParams.id)
-  const baseUrl = "https://sydneytiling.com"
+  const baseUrl = "https://sydneytileco.com"
 
   if (!project) {
     notFound()

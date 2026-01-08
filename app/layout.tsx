@@ -11,7 +11,7 @@ const _spaceGrotesk = Space_Grotesk({
   variable: "--font-display",
 })
 
-const baseUrl = "https://sydneytiling.com"
+const baseUrl = "https://sydneytileco.com"
 
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),

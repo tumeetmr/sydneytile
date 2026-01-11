@@ -89,7 +89,7 @@ export function Services() {
             return (
               <article 
                 key={service.title} 
-                className={`group bg-white/40 dark:bg-white/5 backdrop-blur-md rounded-2xl sm:rounded-3xl p-4 sm:p-5 border border-white/40 dark:border-white/10 shadow-lg hover:shadow-xl hover:bg-white/60 dark:hover:bg-white/10 transition-all duration-500 ${
+                className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 shadow-lg hover:shadow-xl transition-all duration-500 aspect-[3/4] ${
                   isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
                 }`}
                 style={{ transitionDelay: `${200 + index * 100}ms` }}
@@ -98,27 +98,25 @@ export function Services() {
                 itemType="https://schema.org/Service"
                 itemProp="itemListElement"
               >
-                {/* Image */}
-                <div className="relative aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden mb-4 sm:mb-5">
-                  <Image
-                    src={service.image}
-                    alt={service.alt}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    itemProp="image"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
+                <Image
+                  src={service.image}
+                  alt={service.alt}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  itemProp="image"
+                  loading="lazy"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
                 
-                <div className="space-y-3 sm:space-y-4">
-                  <div className="flex items-center gap-2.5 sm:gap-3">
-                    <div className="p-2 bg-white/60 dark:bg-accent/10 backdrop-blur-sm rounded-lg border border-white/40 group-hover:bg-white/80 dark:group-hover:bg-accent/20 transition-colors duration-300 shadow-sm" aria-hidden="true">
-                      <Icon className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
+                <div className="absolute bottom-0 inset-x-0 p-5 sm:p-6 space-y-2 sm:space-y-3 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="flex items-center gap-3 mb-1">
+                    <div className="p-2 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 text-white shadow-sm transition-transform duration-300 group-hover:scale-110" aria-hidden="true">
+                      <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
                     </div>
-                    <h3 className="text-lg sm:text-xl font-semibold" itemProp="name">{service.title}</h3>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide" itemProp="name">{service.title}</h3>
                   </div>
-                  <p className="text-sm sm:text-base text-muted-foreground leading-relaxed" itemProp="description">{service.description}</p>
+                  <p className="text-sm sm:text-base text-gray-200 leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300" itemProp="description">{service.description}</p>
                   <meta itemProp="areaServed" content="Sydney, NSW, Australia" />
                   <meta itemProp="provider" content="Sydney Pro Tiling" />
                 </div>

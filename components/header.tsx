@@ -40,18 +40,16 @@ export function Header() {
   const navItems = [
     { href: "#about", label: "About Us" },
     { href: "#portfolio", label: "Projects" },
-    { href: "#contact", label: "Contacts" },
   ]
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out ${
         isScrolled 
-          ? "bg-white/60 dark:bg-background/60 backdrop-blur-xl shadow-lg shadow-black/5 border-b border-white/20" 
-          : "bg-white/30 dark:bg-background/30 backdrop-blur-md"
+          ? "top-4 w-[95%] max-w-7xl rounded-2xl bg-white/40 dark:bg-black/40 backdrop-blur-3xl shadow-lg border border-white/20 ring-1 ring-white/10" 
+          : "top-0 w-full bg-white/10 dark:bg-black/10 backdrop-blur-lg border-b border-white/5"
       }`}
     >
-      {/* Glassy overlay effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/10 pointer-events-none" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative">
@@ -118,19 +116,18 @@ export function Header() {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div 
         className={`lg:hidden overflow-hidden transition-all duration-500 ease-out ${
           isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <nav className="bg-white/70 dark:bg-background/80 backdrop-blur-xl px-4 sm:px-6 py-4 sm:py-6 space-y-3 sm:space-y-4 border-t border-white/30 dark:border-border/50 shadow-lg">
+        <nav className="bg-white/40 dark:bg-black/40 backdrop-blur-3xl px-4 sm:px-6 py-4 sm:py-6 space-y-3 sm:space-y-4 border-t border-white/20 dark:border-white/10 shadow-lg rounded-b-2xl">
           {navItems.map((item, index) => (
             <a
               key={item.href}
               href={item.href}
               onClick={(e) => handleSmoothScroll(e, item.href)}
-              className={`block text-base sm:text-lg font-medium text-foreground/70 hover:text-foreground hover:bg-white/50 dark:hover:bg-white/10 rounded-lg px-4 py-2 transition-all duration-300 transform ${
+              className={`block text-base sm:text-lg font-medium text-foreground/80 hover:text-foreground hover:bg-white/20 dark:hover:bg-white/10 rounded-xl px-4 py-3 transition-all duration-300 transform ${
                 isMobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}

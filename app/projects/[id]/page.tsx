@@ -93,7 +93,6 @@ export default async function ProjectPage({ params }: { params: Promise<{ id: st
     notFound()
   }
 
-  // JSON-LD Structured Data for Project Page
   const projectJsonLd = {
     "@context": "https://schema.org",
     "@graph": [

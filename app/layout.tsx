@@ -77,12 +77,6 @@ export const metadata: Metadata = {
     address: true,
     telephone: true,
   },
-  alternates: {
-    canonical: baseUrl,
-    languages: {
-      "en-AU": baseUrl,
-    },
-  },
   openGraph: {
     type: "website",
     locale: "en_AU",
@@ -170,7 +164,6 @@ export const metadata: Metadata = {
       },
     ],
   },
-  manifest: "/manifest.json",
   other: {
     "geo.region": "AU-NSW",
     "geo.placename": "Sydney",

@@ -15,33 +15,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  // Service-related pages (using hash anchors for SPA)
-  const servicePages: MetadataRoute.Sitemap = [
-    {
-      url: `${baseUrl}/#services`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#portfolio`,
-      lastModified: currentDate,
-      changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#about`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#contact`,
-      lastModified: currentDate,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-  ]
+  // Service-related pages (using hash anchors for SPA). 
+  // Note: Fragments are not distinct pages for crawlers.
+  const servicePages: MetadataRoute.Sitemap = []
 
   // Project pages
   const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({

@@ -99,7 +99,7 @@ export function Contact() {
             }`}
           >
             <Image
-              src="/images/40.jpg"
+              src="/images/floor/main.jpg"
               alt="Expert bathroom tiling transformation by Sydney Pro Tiling - quality craftsmanship"
               fill
               className="object-cover"

@@ -10,7 +10,7 @@ const services = [
     title: "Floor Tiling",
     description: "Expert floor tile installation for all spaces in Sydney. Standard, large format, and custom patterns available. Perfect for living rooms, kitchens, and commercial spaces.",
     price: "From $80/m²",
-    image: "/images/20.jpg",
+    image: "/images/floor/main.jpg",
     alt: "Professional floor tiling installation in Sydney - large format tiles",
   },
   {
@@ -18,7 +18,7 @@ const services = [
     title: "Wall Tiling",
     description: "Professional wall tiling services for kitchens, bathrooms, and feature walls across Sydney. Subway tiles, splashbacks, and decorative patterns.",
     price: "From $70/m²",
-    image: "/images/22.jpg",
+    image: "/images/wall/main.jpg",
     alt: "Expert wall tiling work - kitchen backsplash installation Sydney",
   },
   {
@@ -26,7 +26,7 @@ const services = [
     title: "Bathroom & Waterproofing",
     description: "Complete bathroom tiling with certified waterproofing services in Sydney. Full renovations, shower tiling, and wet area compliance.",
     price: "From $120/m²",
-    image: "/images/25.jpg",
+    image: "/images/bathroom/2.jpg",
     alt: "Bathroom tiling and waterproofing services Sydney - modern bathroom renovation",
   },
   {
@@ -34,7 +34,7 @@ const services = [
     title: "Custom Designs",
     description: "Herringbone, mosaic, chevron, and intricate patterns for unique spaces. Bespoke tile installations that make your Sydney home stand out.",
     price: "From $150/m²",
-    image: "/images/30.jpg",
+    image: "/images/outdoor/1.jpg",
     alt: "Custom herringbone tile pattern installation Sydney - premium tiling",
   },
 ]

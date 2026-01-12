@@ -87,6 +87,8 @@ export const projects = [
       "/images/floor/13.jpg",
       "/images/floor/14.jpg",
       "/images/floor/15.jpg",
+      "/images/floor/16.jpg",
+      "/images/floor/17.jpg",
     ],
   },
   {
@@ -156,6 +158,9 @@ export const projects = [
       "/images/wall/2.jpg",
       "/images/wall/3.jpg",
       "/images/wall/4.jpg",
+      "/images/wall/5.jpg",
+      "/images/wall/6.jpg",
+      "/images/wall/7.jpg",
     ],
   },
 ]

@@ -70,7 +70,7 @@ export function About() {
             <div className="space-y-2 sm:space-y-3 lg:space-y-4">
               <div className="relative aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden group shadow-lg">
                 <Image
-                  src="/images/5.jpg"
+                  src="/images/wall/main.jpg"
                   alt="Professional bathroom floor tiling work in Sydney - precision tile installation"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -78,7 +78,7 @@ export function About() {
               </div>
               <div className="relative aspect-square rounded-xl sm:rounded-2xl overflow-hidden group shadow-lg">
                 <Image
-                  src="/images/8.jpg"
+                  src="/images/floor/main.jpg"
                   alt="Modern bathroom wall tiling Sydney - subway tiles and splashback installation"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -89,7 +89,7 @@ export function About() {
             <div className="space-y-2 sm:space-y-3 lg:space-y-4 pt-4 sm:pt-6 lg:pt-8">
               <div className="relative aspect-square rounded-xl sm:rounded-2xl overflow-hidden group shadow-lg">
                 <Image
-                  src="/images/12.jpg"
+                  src="/images/wall/main2.jpg"
                   alt="Large format floor tiles installation Sydney - living room tiling project"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -98,7 +98,7 @@ export function About() {
               </div>
               <div className="relative aspect-[3/4] rounded-xl sm:rounded-2xl overflow-hidden group shadow-lg">
                 <Image
-                  src="/images/15.jpg"
+                  src="/images/wall/6.jpg"
                   alt="Kitchen backsplash tiling Sydney - premium tile installation"
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"

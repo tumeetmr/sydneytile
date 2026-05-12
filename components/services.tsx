@@ -2,41 +2,55 @@
 
 import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
-import { Droplet, Home, Grid3x3, Sparkles } from "lucide-react"
+import { ArrowUpRight, Droplet, Grid3x3, Home, Sparkles } from "lucide-react"
 
 const services = [
   {
     icon: Grid3x3,
     title: "Floor Tiling",
-    description: "Expert floor tile installation for all spaces in Sydney. Standard, large format, and custom patterns available. Perfect for living rooms, kitchens, and commercial spaces.",
+    description:
+      "Careful substrate prep, accurate spacing, and sharp edges for kitchens, living areas, hallways, and commercial floors.",
     price: "From $80/m²",
     image: "/images/floor/main.jpg",
-    alt: "Professional floor tiling installation in Sydney - large format tiles",
+    alt: "Professional floor tiling installation in Sydney",
+    deliverable: "Large format, herringbone, and standard layouts",
   },
   {
     icon: Home,
     title: "Wall Tiling",
-    description: "Professional wall tiling services for kitchens, bathrooms, and feature walls across Sydney. Subway tiles, splashbacks, and decorative patterns.",
+    description:
+      "Clean vertical lines for splashbacks, bathrooms, laundries, and feature walls with a finish that feels tailored to the room.",
     price: "From $70/m²",
     image: "/images/wall/main.jpg",
-    alt: "Expert wall tiling work - kitchen backsplash installation Sydney",
+    alt: "Wall tiling and splashback installation in Sydney",
+    deliverable: "Splashbacks, stacked layouts, and feature walls",
   },
   {
     icon: Droplet,
     title: "Bathroom & Waterproofing",
-    description: "Complete bathroom tiling with certified waterproofing services in Sydney. Full renovations, shower tiling, and wet area compliance.",
+    description:
+      "Wet-area tiling supported by waterproofing know-how for bathrooms, ensuites, showers, and renovation upgrades.",
     price: "From $120/m²",
     image: "/images/bathroom/2.jpg",
-    alt: "Bathroom tiling and waterproofing services Sydney - modern bathroom renovation",
+    alt: "Bathroom tiling and waterproofing services in Sydney",
+    deliverable: "Showers, niches, bathrooms, and wet areas",
   },
   {
     icon: Sparkles,
-    title: "Custom Designs",
-    description: "Herringbone, mosaic, chevron, and intricate patterns for unique spaces. Bespoke tile installations that make your Sydney home stand out.",
+    title: "Custom Layouts",
+    description:
+      "Pattern-led installations for projects that need more than a standard grid, including herringbone, chevron, and mosaics.",
     price: "From $150/m²",
     image: "/images/outdoor/1.jpg",
-    alt: "Custom herringbone tile pattern installation Sydney - premium tiling",
+    alt: "Custom feature tiling design in Sydney",
+    deliverable: "Statement surfaces with elevated detailing",
   },
+]
+
+const processSteps = [
+  "Consultation and tile advice",
+  "Surface prep and layout planning",
+  "Precise install and clean handover",
 ]
 
 export function Services() {
@@ -61,68 +75,116 @@ export function Services() {
   }, [])
 
   return (
-    <section 
-      id="services" 
-      ref={sectionRef} 
-      className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-12 bg-secondary/20 overflow-hidden"
+    <section
+      id="services"
+      ref={sectionRef}
+      className="mesh-section overflow-hidden px-4 py-16 sm:px-6 sm:py-24 lg:px-12 lg:py-32"
       aria-labelledby="services-heading"
       itemScope
       itemType="https://schema.org/ItemList"
     >
       <div className="container mx-auto max-w-7xl">
-        <header 
-          className={`mb-10 sm:mb-16 lg:mb-20 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-          }`}
-        >
-          <h2 id="services-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-balance max-w-2xl">
-            Professional Tiling Services in Sydney
-          </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            Expert tiling solutions for residential and commercial projects across Greater Sydney. Licensed, insured, and committed to quality.
-          </p>
-        </header>
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
+          <header
+            className={`transition-all duration-700 ${
+              isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+            }`}
+          >
+            <div className="surface-panel inline-flex rounded-full px-4 py-2 text-sm font-semibold text-primary">
+              Services
+            </div>
+            <h2
+              id="services-heading"
+              className="mt-5 max-w-xl text-3xl font-bold leading-tight text-balance sm:text-4xl md:text-5xl"
+              style={{ fontFamily: "var(--font-display), sans-serif" }}
+            >
+              Professional tiling with sharper detailing and a cleaner process.
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground sm:text-lg">
+              Each project is approached like a finished surface, not just an install. We focus on
+              alignment, material selection, preparation, and the final look of the whole room.
+            </p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8" role="list">
-          {services.map((service, index) => {
-            const Icon = service.icon
-            return (
-              <article 
-                key={service.title} 
-                className={`group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/20 shadow-lg hover:shadow-xl transition-all duration-500 aspect-[3/4] ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-                }`}
-                style={{ transitionDelay: `${200 + index * 100}ms` }}
-                role="listitem"
-                itemScope
-                itemType="https://schema.org/Service"
-                itemProp="itemListElement"
-              >
-                <Image
-                  src={service.image}
-                  alt={service.alt}
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  itemProp="image"
-                  loading="lazy"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-500" />
-                
-                <div className="absolute bottom-0 inset-x-0 p-5 sm:p-6 space-y-2 sm:space-y-3 translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
-                  <div className="flex items-center gap-3 mb-1">
-                    <div className="p-2 bg-white/10 backdrop-blur-md rounded-lg border border-white/20 text-white shadow-sm transition-transform duration-300 group-hover:scale-110" aria-hidden="true">
-                      <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+            <div className="surface-panel mt-8 rounded-[1.8rem] p-6">
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary/55">
+                How Projects Run
+              </p>
+              <div className="mt-5 space-y-4">
+                {processSteps.map((step, index) => (
+                  <div key={step} className="flex items-start gap-4">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                      {index + 1}
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-wide" itemProp="name">{service.title}</h3>
+                    <p className="pt-1 text-sm font-medium text-primary/85 sm:text-base">{step}</p>
                   </div>
-                  <p className="text-sm sm:text-base text-gray-200 leading-relaxed line-clamp-3 group-hover:line-clamp-none transition-all duration-300" itemProp="description">{service.description}</p>
-                  <meta itemProp="areaServed" content="Sydney, NSW, Australia" />
-                  <meta itemProp="provider" content="Sydney Pro Tiling" />
-                </div>
-              </article>
-            )
-          })}
+                ))}
+              </div>
+            </div>
+          </header>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2" role="list">
+            {services.map((service, index) => {
+              const Icon = service.icon
+
+              return (
+                <article
+                  key={service.title}
+                  className={`tile-3d surface-panel group relative flex min-h-[27rem] flex-col overflow-hidden rounded-[2rem] transition-all duration-700 ${
+                    isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                  }`}
+                  style={{ transitionDelay: `${180 + index * 120}ms` }}
+                  role="listitem"
+                  itemScope
+                  itemType="https://schema.org/Service"
+                  itemProp="itemListElement"
+                >
+                  <div className="relative h-52 overflow-hidden">
+                    <Image
+                      src={service.image}
+                      alt={service.alt}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                      itemProp="image"
+                      loading="lazy"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    />
+                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,14,10,0.08)_0%,rgba(17,14,10,0.68)_100%)]" />
+                    <div className="surface-panel absolute left-4 top-4 rounded-2xl px-3 py-2 text-xs font-semibold text-primary">
+                      {service.price}
+                    </div>
+                  </div>
+
+                  <div className="flex flex-1 flex-col p-6">
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="rounded-2xl bg-accent/16 p-3 text-accent">
+                        <Icon className="h-5 w-5" aria-hidden="true" />
+                      </div>
+                      <ArrowUpRight className="mt-1 h-5 w-5 text-primary/35" aria-hidden="true" />
+                    </div>
+
+                    <h3 className="mt-5 text-2xl font-bold tracking-tight text-primary" itemProp="name">
+                      {service.title}
+                    </h3>
+                    <p
+                      className="mt-3 text-sm leading-7 text-muted-foreground sm:text-base"
+                      itemProp="description"
+                    >
+                      {service.description}
+                    </p>
+
+                    <div className="mt-auto pt-6">
+                      <div className="rounded-2xl border border-primary/10 bg-white/55 px-4 py-3 text-sm font-medium text-primary/80">
+                        {service.deliverable}
+                      </div>
+                    </div>
+
+                    <meta itemProp="areaServed" content="Sydney, NSW, Australia" />
+                    <meta itemProp="provider" content="Sydney Pro Tiling" />
+                  </div>
+                </article>
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>

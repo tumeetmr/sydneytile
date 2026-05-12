@@ -1,9 +1,15 @@
 "use client"
 
-import { useState, useEffect, useCallback } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
+
+const navItems = [
+  { href: "#services", label: "Services" },
+  { href: "#portfolio", label: "Projects" },
+  { href: "#about", label: "About" },
+  { href: "#faq", label: "FAQ" },
+]
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -11,94 +17,68 @@ export function Header() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
+      setIsScrolled(window.scrollY > 12)
     }
+
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Smooth scroll handler
-  const handleSmoothScroll = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    const targetId = href.replace('#', '')
-    const element = document.getElementById(targetId)
-    
-    if (element) {
-      const headerOffset = 96 // Account for fixed header height
-      const elementPosition = element.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      })
-    }
-    
+  const handleNavClick = () => {
     setIsMobileMenuOpen(false)
-  }, [])
-
-  const navItems = [
-    { href: "#about", label: "About Us" },
-    { href: "#portfolio", label: "Projects" },
-  ]
+  }
 
   return (
     <header
-      className={`fixed left-1/2 -translate-x-1/2 z-50 transition-all duration-500 ease-out ${
-        isScrolled 
-          ? "top-4 w-[95%] max-w-7xl rounded-2xl bg-white/40 dark:bg-black/40 backdrop-blur-3xl shadow-lg border border-white/20 ring-1 ring-white/10" 
-          : "top-0 w-full bg-white/10 dark:bg-black/10 backdrop-blur-lg border-b border-white/5"
+      className={`fixed left-1/2 z-50 w-[calc(100%-1.5rem)] max-w-7xl -translate-x-1/2 transition-all duration-500 ${
+        isScrolled
+          ? "top-3 rounded-[1.6rem] border border-white/35 bg-white/60 shadow-[0_20px_50px_rgba(70,51,30,0.16)] backdrop-blur-2xl"
+          : "top-4 rounded-[1.8rem] border border-white/12 bg-white/10 backdrop-blur-xl"
       }`}
     >
-      <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/10 pointer-events-none" />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-12 relative">
-        <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
-          <Link href="/" className="flex items-center gap-2 group">
-            <Image 
-              src="/sydneytiling.png" 
-              alt="Logo"
-              width={52}
-              height={52}
-              className="w-10 h-10 sm:w-16 sm:h-16 object-contain rounded-full transition-transform duration-300 group-hover:scale-110"
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between sm:h-20">
+          <Link href="/" className="flex items-center gap-3">
+            <Image
+              src="/sydneytiling.png"
+              alt="Sydney Pro Tiling logo"
+              width={1200}
+              height={1200}
+              className="h-11 w-11 rounded-2xl object-contain shadow-lg shadow-black/10 sm:h-12 sm:w-12"
+              priority
             />
+            <div className="hidden sm:block">
+              <p className="text-sm font-semibold uppercase tracking-[0.24em] text-primary/55">Sydney Pro Tiling</p>
+              <p className="text-sm font-medium text-primary/75">Crafted finishes across Greater Sydney</p>
+            </div>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
-            {navItems.map((item, index) => (
+          <nav className="hidden items-center gap-7 lg:flex">
+            {navItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
-                onClick={(e) => handleSmoothScroll(e, item.href)}
-                className="text-sm xl:text-base font-medium text-foreground/70 hover:text-foreground transition-all duration-300 relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full px-2 py-1"
-                style={{ animationDelay: `${index * 100}ms` }}
+                className="text-sm font-semibold text-primary/70 transition-colors duration-300 hover:text-primary"
               >
                 {item.label}
               </a>
             ))}
-            <Button 
-              size="lg" 
-              className="rounded-full px-6 xl:px-8 bg-primary/90 backdrop-blur-sm border border-white/20 shadow-lg shadow-primary/20 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/30 hover:bg-primary" 
-              asChild
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center rounded-full bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground shadow-[0_16px_36px_rgba(72,56,39,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/92"
             >
-              <a href="#contact" onClick={(e) => handleSmoothScroll(e, '#contact')}>Contact Us</a>
-            </Button>
+              Get Free Quote
+            </a>
           </nav>
 
-          <button 
-            className="lg:hidden text-foreground p-2 rounded-full bg-white/40 dark:bg-white/10 backdrop-blur-sm border border-white/30 shadow-md transition-all duration-300 hover:scale-110 hover:bg-white/60 dark:hover:bg-white/20"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          <button
+            type="button"
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/30 bg-white/55 text-primary shadow-md lg:hidden"
+            onClick={() => setIsMobileMenuOpen((open) => !open)}
             aria-label="Toggle menu"
+            aria-expanded={isMobileMenuOpen}
           >
-            <svg 
-              width="20" 
-              height="20" 
-              viewBox="0 0 24 24" 
-              fill="none" 
-              stroke="currentColor" 
-              strokeWidth="2"
-              className={`transition-transform duration-300 ${isMobileMenuOpen ? 'rotate-90' : ''}`}
-            >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               {isMobileMenuOpen ? (
                 <>
                   <line x1="18" y1="6" x2="6" y2="18" />
@@ -106,8 +86,8 @@ export function Header() {
                 </>
               ) : (
                 <>
-                  <line x1="3" y1="12" x2="21" y2="12" />
                   <line x1="3" y1="6" x2="21" y2="6" />
+                  <line x1="3" y1="12" x2="21" y2="12" />
                   <line x1="3" y1="18" x2="21" y2="18" />
                 </>
               )}
@@ -116,32 +96,31 @@ export function Header() {
         </div>
       </div>
 
-      <div 
-        className={`lg:hidden overflow-hidden transition-all duration-500 ease-out ${
-          isMobileMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+      <div
+        className={`overflow-hidden transition-all duration-500 lg:hidden ${
+          isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <nav className="bg-white/40 dark:bg-black/40 backdrop-blur-3xl px-4 sm:px-6 py-4 sm:py-6 space-y-3 sm:space-y-4 border-t border-white/20 dark:border-white/10 shadow-lg rounded-b-2xl">
-          {navItems.map((item, index) => (
+        <nav className="border-t border-white/20 bg-white/75 px-4 py-4 backdrop-blur-2xl sm:px-6">
+          <div className="grid gap-2">
+            {navItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                onClick={handleNavClick}
+                className="rounded-2xl px-4 py-3 text-base font-semibold text-primary/80 transition-colors duration-300 hover:bg-white/70 hover:text-primary"
+              >
+                {item.label}
+              </a>
+            ))}
             <a
-              key={item.href}
-              href={item.href}
-              onClick={(e) => handleSmoothScroll(e, item.href)}
-              className={`block text-base sm:text-lg font-medium text-foreground/80 hover:text-foreground hover:bg-white/20 dark:hover:bg-white/10 rounded-xl px-4 py-3 transition-all duration-300 transform ${
-                isMobileMenuOpen ? 'translate-x-0 opacity-100' : '-translate-x-4 opacity-0'
-              }`}
-              style={{ transitionDelay: `${index * 100}ms` }}
+              href="#contact"
+              onClick={handleNavClick}
+              className="mt-2 inline-flex items-center justify-center rounded-full bg-primary px-5 py-3.5 text-sm font-semibold text-primary-foreground"
             >
-              {item.label}
+              Get Free Quote
             </a>
-          ))}
-          <Button 
-            size="lg" 
-            className="w-full rounded-full mt-4 bg-primary/90 backdrop-blur-sm border border-white/20 shadow-lg transition-all duration-300 hover:bg-primary hover:shadow-xl" 
-            asChild
-          >
-            <a href="#contact" onClick={(e) => handleSmoothScroll(e, '#contact')}>Contact Us</a>
-          </Button>
+          </div>
         </nav>
       </div>
     </header>

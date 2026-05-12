@@ -5,6 +5,7 @@ import { Portfolio } from "@/components/portfolio"
 import { About } from "@/components/about"
 import { Contact } from "@/components/contact"
 import { Footer } from "@/components/footer"
+import { FAQ } from "@/components/faq"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -22,6 +23,7 @@ export default function Home() {
         <Services />
         <Portfolio />
         <About />
+        <FAQ />
         <Contact />
       </main>
       <Footer />

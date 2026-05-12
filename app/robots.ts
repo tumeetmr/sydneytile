@@ -1,31 +1,14 @@
 import type { MetadataRoute } from "next"
+import { siteConfig } from "@/lib/site"
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://sydneytileco.com"
-
   return {
-    rules: [
-      {
-        userAgent: "*",
-        allow: "/",
-        disallow: ["/api/", "/private/"],
-      },
-      {
-        userAgent: "Googlebot",
-        allow: "/",
-        disallow: ["/api/"],
-      },
-      {
-        userAgent: "Googlebot-Image",
-        allow: ["/images/", "/og-image.jpg"],
-      },
-      {
-        userAgent: "Bingbot",
-        allow: "/",
-        disallow: ["/api/"],
-      },
-    ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-    host: baseUrl,
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: ["/api/"],
+    },
+    sitemap: `${siteConfig.baseUrl}/sitemap.xml`,
+    host: siteConfig.baseUrl,
   }
 }

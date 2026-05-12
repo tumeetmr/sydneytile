@@ -2,14 +2,21 @@
 
 import type React from "react"
 
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import emailjs from "@emailjs/browser"
+import { Mail, MapPin, MessageSquareText } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 
 type FormStatus = "idle" | "submitting" | "success" | "error"
+
+const trustPoints = [
+  "Free quote tailored to your space and tile selection",
+  "Helpful guidance on layouts, finishes, and wet-area work",
+  "Service across Greater Sydney",
+]
 
 export function Contact() {
   const [formStatus, setFormStatus] = useState<FormStatus>("idle")
@@ -59,7 +66,7 @@ export function Contact() {
     } catch (error) {
       console.error("Form submission error:", error)
       setFormStatus("error")
-      setErrorMessage("Failed to send message. Please try again or email us directly.")
+      setErrorMessage("The message could not be sent. Please try again or email directly.")
 
       setTimeout(() => {
         setFormStatus("idle")
@@ -69,92 +76,127 @@ export function Contact() {
   }
 
   return (
-    <section 
-      id="contact" 
-      ref={sectionRef} 
-      className="py-16 sm:py-24 lg:py-32 px-4 sm:px-6 lg:px-12 bg-secondary/20 overflow-hidden"
+    <section
+      id="contact"
+      ref={sectionRef}
+      className="mesh-section overflow-hidden px-4 py-16 sm:px-6 sm:py-24 lg:px-12 lg:py-32"
       aria-labelledby="contact-heading"
       itemScope
       itemType="https://schema.org/ContactPage"
     >
       <div className="container mx-auto max-w-6xl">
-        <header 
-          className={`text-center mb-10 sm:mb-12 lg:mb-16 transition-all duration-700 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+        <header
+          className={`mx-auto max-w-3xl text-center transition-all duration-700 ${
+            isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
           }`}
         >
-          <h2 id="contact-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 sm:mb-6 text-balance">
-            Get a Free Tiling Quote in Sydney
+          <div className="surface-panel inline-flex rounded-full px-4 py-2 text-sm font-semibold text-primary">
+            Contact
+          </div>
+          <h2
+            id="contact-heading"
+            className="mt-5 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
+            style={{ fontFamily: "var(--font-display), sans-serif" }}
+          >
+            Request a quote for your Sydney tiling project.
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Ready to transform your space? Contact Sydney&apos;s trusted tiling professionals for a free consultation and quote. We service all of Greater Sydney.
+          <p className="mt-5 text-base leading-8 text-muted-foreground sm:text-lg">
+            Share your project details and we&apos;ll come back with a tailored quote for the work,
+            materials, and finish you&apos;re aiming for.
           </p>
         </header>
 
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start">
-          {/* Image */}
-          <div 
-            className={`relative aspect-[4/3] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl transition-all duration-700 delay-200 order-2 lg:order-1 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+        <div className="mt-12 grid items-start gap-6 lg:grid-cols-[0.86fr_1.14fr] lg:gap-10">
+          <div
+            className={`tile-3d surface-panel-dark relative overflow-hidden rounded-[2rem] p-5 text-white transition-all duration-700 delay-150 ${
+              isVisible ? "translate-x-0 opacity-100" : "-translate-x-10 opacity-0"
             }`}
           >
-            <Image
-              src="/images/floor/main.jpg"
-              alt="Expert bathroom tiling transformation by Sydney Pro Tiling - quality craftsmanship"
-              fill
-              className="object-cover"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-            <div className="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
-              <div className="bg-white/10 backdrop-blur-md rounded-xl sm:rounded-2xl p-3 sm:p-4 border border-white/20">
-                <p className="text-base sm:text-lg font-medium mb-1 sm:mb-2 text-white">Transform Your Sydney Home</p>
-                <p className="text-xs sm:text-sm text-white/80">Licensed tiling services • Free quotes • 15+ years experience</p>
+            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.6rem]">
+              <Image
+                src="/images/floor/main.jpg"
+                alt="Premium floor tiling project by Sydney Pro Tiling"
+                fill
+                className="object-cover"
+                loading="lazy"
+                sizes="(max-width: 1024px) 100vw, 40vw"
+              />
+              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(17,14,10,0.08)_0%,rgba(17,14,10,0.72)_100%)]" />
+            </div>
+
+            <div className="absolute left-6 right-6 top-6 rounded-[1.4rem] border border-white/12 bg-black/28 p-4 backdrop-blur-md">
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">What you can send</p>
+              <div className="mt-3 space-y-2.5 text-sm text-white/82">
+                {trustPoints.map((point) => (
+                  <div key={point} className="flex items-start gap-3">
+                    <MessageSquareText className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" />
+                    <span>{point}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="absolute bottom-6 left-6 right-6 grid gap-3 sm:grid-cols-2">
+              <div className="rounded-[1.3rem] border border-white/12 bg-white/12 p-4 backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                  <Mail className="h-5 w-5 text-amber-300" />
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/55">Email</p>
+                    <a href="mailto:sydneytileco@gmail.com" className="text-sm font-semibold text-white">
+                      sydneytileco@gmail.com
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className="rounded-[1.3rem] border border-white/12 bg-white/12 p-4 backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                  <MapPin className="h-5 w-5 text-amber-300" />
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/55">Area</p>
+                    <p className="text-sm font-semibold text-white">Greater Sydney</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Form - Glassy card */}
-          <div 
-            className={`order-1 lg:order-2 bg-white/50 dark:bg-white/5 backdrop-blur-xl rounded-2xl sm:rounded-3xl p-5 sm:p-6 lg:p-8 border border-white/40 dark:border-white/10 shadow-xl transition-all duration-700 delay-300 ${
-              isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"
+          <div
+            className={`surface-panel rounded-[2rem] p-5 shadow-xl transition-all duration-700 delay-250 sm:p-7 ${
+              isVisible ? "translate-x-0 opacity-100" : "translate-x-10 opacity-0"
             }`}
             itemScope
             itemType="https://schema.org/ContactPoint"
           >
-            {/* Success Message */}
             {formStatus === "success" && (
-              <div className="mb-6 p-4 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 rounded-xl text-green-800 dark:text-green-200 text-center animate-in fade-in slide-in-from-top-2 duration-300">
-                <p className="font-semibold">Thank you for your message! 🎉</p>
-                <p className="text-sm mt-1">We&apos;ll get back to you within 24 hours.</p>
+              <div className="mb-6 rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-4 text-center text-emerald-800">
+                <p className="font-semibold">Message sent successfully.</p>
+                <p className="mt-1 text-sm">We&apos;ll follow up as soon as possible.</p>
               </div>
             )}
 
-            {/* Error Message */}
             {formStatus === "error" && (
-              <div className="mb-6 p-4 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 rounded-xl text-red-800 dark:text-red-200 text-center animate-in fade-in slide-in-from-top-2 duration-300">
-                <p className="font-semibold">Oops! Something went wrong</p>
-                <p className="text-sm mt-1">{errorMessage}</p>
+              <div className="mb-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-4 text-center text-red-800">
+                <p className="font-semibold">There was a sending issue.</p>
+                <p className="mt-1 text-sm">{errorMessage}</p>
               </div>
             )}
 
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-6" aria-label="Contact form for free tiling quote">
-              
-              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-                <div className="transition-all duration-300 hover:translate-y-[-2px]">
-                  <label htmlFor="name" className="block text-xs sm:text-sm font-medium mb-2 sm:mb-3 text-foreground/70">
-                    Your Name
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5" aria-label="Contact form for free tiling quote">
+              <div className="grid gap-5 sm:grid-cols-2">
+                <div>
+                  <label htmlFor="name" className="mb-2 block text-sm font-semibold text-primary/75">
+                    Name
                   </label>
                   <Input
                     id="name"
                     name="name"
                     required
                     placeholder="Your name"
-                    className="h-12 sm:h-14 rounded-xl bg-white/60 dark:bg-white/10 backdrop-blur-sm border-white/40 dark:border-white/20 transition-all duration-300 focus:shadow-lg focus:bg-white/80 dark:focus:bg-white/20"
+                    className="h-14 rounded-2xl border-white/60 bg-white/70"
                   />
                 </div>
-                <div className="transition-all duration-300 hover:translate-y-[-2px]">
-                  <label htmlFor="phone" className="block text-xs sm:text-sm font-medium mb-2 sm:mb-3 text-foreground/70">
+                <div>
+                  <label htmlFor="phone" className="mb-2 block text-sm font-semibold text-primary/75">
                     Phone
                   </label>
                   <Input
@@ -162,13 +204,14 @@ export function Contact() {
                     name="phone"
                     type="tel"
                     required
-                    placeholder="Your phone"
-                    className="h-12 sm:h-14 rounded-xl bg-white/60 dark:bg-white/10 backdrop-blur-sm border-white/40 dark:border-white/20 transition-all duration-300 focus:shadow-lg focus:bg-white/80 dark:focus:bg-white/20"
+                    placeholder="Best contact number"
+                    className="h-14 rounded-2xl border-white/60 bg-white/70"
                   />
                 </div>
               </div>
-              <div className="transition-all duration-300 hover:translate-y-[-2px]">
-                <label htmlFor="email" className="block text-xs sm:text-sm font-medium mb-2 sm:mb-3 text-foreground/70">
+
+              <div>
+                <label htmlFor="email" className="mb-2 block text-sm font-semibold text-primary/75">
                   Email
                 </label>
                 <Input
@@ -176,75 +219,34 @@ export function Contact() {
                   name="email"
                   type="email"
                   required
-                  placeholder="your@email.com"
-                  className="h-12 sm:h-14 rounded-xl bg-white/60 dark:bg-white/10 backdrop-blur-sm border-white/40 dark:border-white/20 transition-all duration-300 focus:shadow-lg focus:bg-white/80 dark:focus:bg-white/20"
+                  placeholder="you@example.com"
+                  className="h-14 rounded-2xl border-white/60 bg-white/70"
                 />
               </div>
-              <div className="transition-all duration-300 hover:translate-y-[-2px]">
-                <label htmlFor="message" className="block text-xs sm:text-sm font-medium mb-2 sm:mb-3 text-foreground/70">
-                  Project Details
+
+              <div>
+                <label htmlFor="message" className="mb-2 block text-sm font-semibold text-primary/75">
+                  Project details
                 </label>
                 <Textarea
                   id="message"
                   name="message"
                   required
-                  placeholder="Tell us about your project..."
-                  rows={5}
-                  className="rounded-xl bg-white/60 dark:bg-white/10 backdrop-blur-sm border-white/40 dark:border-white/20 resize-none transition-all duration-300 focus:shadow-lg focus:bg-white/80 dark:focus:bg-white/20"
+                  placeholder="Tell us about the rooms, tile type, area size, and any waterproofing or custom layout requirements."
+                  rows={6}
+                  className="rounded-[1.5rem] border-white/60 bg-white/70 resize-none"
                 />
               </div>
-              <Button 
-                type="submit" 
-                disabled={formStatus === "submitting"} 
-                size="lg" 
-                className="w-full h-12 sm:h-14 rounded-full text-sm sm:text-base bg-primary/90 backdrop-blur-sm border border-white/20 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:bg-primary active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
+
+              <Button
+                type="submit"
+                disabled={formStatus === "submitting"}
+                size="lg"
+                className="h-14 w-full rounded-full bg-primary text-base font-semibold text-primary-foreground shadow-[0_18px_40px_rgba(73,56,36,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-primary/92 disabled:cursor-not-allowed disabled:opacity-70"
               >
-                {formStatus === "submitting" ? (
-                  <span className="flex items-center gap-2">
-                    <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                    </svg>
-                    Sending...
-                  </span>
-                ) : formStatus === "success" ? (
-                  <span className="flex items-center gap-2">
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    Sent!
-                  </span>
-                ) : (
-                  "Get Free Quote"
-                )}
+                {formStatus === "submitting" ? "Sending..." : "Request Free Quote"}
               </Button>
             </form>
-
-            <div className="grid grid-cols-2 gap-4 sm:gap-6 mt-6 sm:mt-10 pt-6 sm:pt-10 border-t border-white/30 dark:border-border/50">
-              <div 
-                className={`text-center bg-white/40 dark:bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/30 transition-all duration-500 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                }`}
-                style={{ transitionDelay: "600ms" }}
-              >
-                <h3 className="text-[10px] sm:text-xs font-medium text-muted-foreground mb-1.5 sm:mb-2 uppercase tracking-wide">Email</h3>
-                <a
-                  href="mailto:sydneytileco@gmail.com"
-                  className="text-xs sm:text-sm font-semibold hover:text-accent transition-colors break-all"
-                >
-                  sydneytileco@gmail.com
-                </a>
-              </div>
-              <div 
-                className={`text-center bg-white/40 dark:bg-white/5 backdrop-blur-sm rounded-xl p-3 sm:p-4 border border-white/30 transition-all duration-500 ${
-                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-                }`}
-                style={{ transitionDelay: "700ms" }}
-              >
-                <h3 className="text-[10px] sm:text-xs font-medium text-muted-foreground mb-1.5 sm:mb-2 uppercase tracking-wide">Location</h3>
-                <p className="text-xs sm:text-sm font-semibold">Greater Sydney</p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
